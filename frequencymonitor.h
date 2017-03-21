@@ -11,7 +11,7 @@ class FrequencyMonitor : public QQuickItem
 {
     Q_OBJECT
     Q_PROPERTY(int fps READ fps NOTIFY fpsChanged)
-    Q_PROPERTY(int refreshFrequency READ refreshFrequency WRITE setRefreshFrequency NOTIFY refreshFrequencyChanged)
+    Q_PROPERTY(int refreshPeriod READ refreshPeriod WRITE setRefreshPeriod NOTIFY refreshPeriodChanged)
 public:
     explicit FrequencyMonitor(QQuickItem *parent = 0);
 
@@ -19,12 +19,12 @@ public:
     void setFps(int fps);
 
     // by default refresh one time per 1000 msec
-    int refreshFrequency() const;
-    void setRefreshFrequency(int msec);
+    int refreshPeriod() const;
+    void setRefreshPeriod(int msec);
 
 signals:
     void fpsChanged();
-    void refreshFrequencyChanged();
+    void refreshPeriodChanged();
 
 public slots:
     void handleAfterRendering();
@@ -35,7 +35,7 @@ protected:
     QTime m_time;
     int m_fps;
     int m_counter;
-    int m_refreshFrequency;
+    int m_refreshPeriod;
 
 };
 

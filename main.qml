@@ -8,7 +8,7 @@ Item {
 
     FrequencyMonitor {
         id: monitor
-        refreshFrequency: 500
+        refreshPeriod: 500
     }
 
     Text {

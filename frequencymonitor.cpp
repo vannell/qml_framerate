@@ -4,7 +4,7 @@
 FrequencyMonitor::FrequencyMonitor(QQuickItem *parent) :
     QQuickItem(parent),
     m_counter(0),
-    m_refreshFrequency(1000)
+    m_refreshPeriod(1000)
 {
     connect(this, &FrequencyMonitor::windowChanged, this, &FrequencyMonitor::handleWindowChanged);
 }
@@ -23,18 +23,18 @@ void FrequencyMonitor::setFps(int fps)
     emit fpsChanged();
 }
 
-int FrequencyMonitor::refreshFrequency() const
+int FrequencyMonitor::refreshPeriod() const
 {
-    return m_refreshFrequency;
+    return m_refreshPeriod;
 }
 
-void FrequencyMonitor::setRefreshFrequency(int msec)
+void FrequencyMonitor::setRefreshPeriod(int msec)
 {
-    if (m_refreshFrequency == msec)
+    if (m_refreshPeriod == msec)
         return;
 
-    m_refreshFrequency = msec;
-    emit refreshFrequencyChanged();
+    m_refreshPeriod = msec;
+    emit refreshPeriodChanged();
 }
 
 void FrequencyMonitor::handleAfterRendering()
@@ -43,7 +43,7 @@ void FrequencyMonitor::handleAfterRendering()
 
     m_counter++;
 
-    if (elapsedMsec >= m_refreshFrequency)
+    if (elapsedMsec >= m_refreshPeriod)
     {
         setFps(m_counter / (elapsedMsec / 1000.0));
 
